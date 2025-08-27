@@ -1,0 +1,56 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const enums_1 = require("./enums");
+const parseComment = (commentFromRequest) => {
+    if (!isString(commentFromRequest)) {
+        throw new Error("Incorrect or missing comment");
+    }
+    return commentFromRequest;
+};
+const parseDate = (dateFromRequest) => {
+    if (!isString(dateFromRequest) || !isDate(dateFromRequest)) {
+        throw new Error("Incorrect or missing date: " + dateFromRequest);
+    }
+    return dateFromRequest;
+};
+const isString = (text) => {
+    return typeof text === "string" || text instanceof String;
+};
+const isDate = (date) => {
+    return Boolean(Date.parse(date));
+};
+const parseWeather = (weatherFromRequest) => {
+    if (!isString(weatherFromRequest) || !isWeather(weatherFromRequest)) {
+        throw new Error("Incorrect or missing weather");
+    }
+    return weatherFromRequest;
+};
+const isWeather = (param) => {
+    if (!param) {
+        return false;
+    }
+    return Object.values(enums_1.WeatherEnum).includes(param);
+};
+const parseVisibility = (visibilityFromRequest) => {
+    if (!isString(visibilityFromRequest) || !isVisibility(visibilityFromRequest)) {
+        throw new Error("Incorrect or missing visibility");
+    }
+    return visibilityFromRequest;
+};
+const isVisibility = (param) => {
+    if (!param) {
+        return false;
+    }
+    return Object.values(enums_1.VisibilityEnum).includes(param);
+};
+const toNewDiaryEntry = (object) => {
+    const newEntry = {
+        comment: parseComment(object.comment),
+        date: parseDate(object.date),
+        weather: parseWeather(object.weather),
+        visibility: parseVisibility(object.visibility),
+    };
+    return newEntry;
+};
+exports.default = toNewDiaryEntry;
+//# sourceMappingURL=utils.js.map
