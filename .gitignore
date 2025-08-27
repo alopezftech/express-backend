@@ -15,6 +15,7 @@ pnpm-debug.log*
 # Variables de entorno
 .env
 .env.*.local
+.env*
 
 # Archivos del editor/IDE
 .vscode/

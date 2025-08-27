@@ -2,6 +2,9 @@ import express from "express";
 import reportRouter from "./routes/routes"; // renombrado
 import { errorHandler, getLoggedErrors } from "./middlewares/errorHandler";
 import { AppError } from "./middlewares/appError";
+import dotenvFlow from 'dotenv-flow';
+
+dotenvFlow.config();
 
 const app = express();
 app.use(express.json());
@@ -52,3 +55,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("PORT:", process.env.PORT);
